@@ -7,19 +7,21 @@
     </a>
 </header>
 
-<div class='w-11/12 m-auto border-solid border-2 border-purple-500 rounded mt-10'>
-    <table>
-        <thead>
-            <tr>
-                <td>
-                    To Do´s
-                </td>
-            </tr>
-        </thead>
-        <tbody>
-        </tbody>
-    </table>
+<div class='w-11/12 m-auto mt-10 p-2'>
+    <h1 class='bg-purple-500 text-white font-medium rounded p-2'> To Do´s</h1>
+    <ul>
+        <ToDo />
+        <ToDo />
+        <ToDo />
+        <ToDo />
+    </ul>
+    <AddToDo />
 </div>
+
+<script>
+    import ToDo from '../components/toDo/ToDo.svelte';
+    import AddToDo from '../components/addToDo/AddToDo.svelte';
+</script>
 
 <style global>
     @import '../css/styles.css';
