@@ -9,7 +9,7 @@
 
 <div class='w-11/12 m-auto mt-10 p-2'>
     <h1 class='bg-purple-500 text-white font-medium rounded p-2'> To Do´s</h1>
-    <ul>
+    <ul class='mb-5'>
         <ToDo description={'eating'} />
         <ToDo description={'shopping'}/>
         <ToDo description={'cleaning'}/>
