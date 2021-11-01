@@ -9,20 +9,30 @@
 
 <div class='w-11/12 m-auto mt-10 p-2'>
     <h1 class='bg-purple-500 text-white font-medium rounded p-2'> To Do´s</h1>
-    <ul class='mb-5'>
-        <ToDo description={'eating'} />
-        <ToDo description={'shopping'}/>
-        <ToDo description={'cleaning'}/>
-        <ToDo description={'learn something'}/>
-        <ToDo description={'reboot pc'}/>
-        <ToDo description={'paint kitchen'}/>
-    </ul>
+    {#if toDos}
+        <ul class='mb-5'>
+            {#each toDos as todo }
+                <ToDo description={todo} />
+            {/each}
+        </ul>
+    {/if}
     <AddToDo />
 </div>
 
 <script>
+    import { onMount } from 'svelte';
+    // Components
     import ToDo from '../components/toDo/ToDo.svelte';
     import AddToDo from '../components/addToDo/AddToDo.svelte';
+    // Utils
+    import getData from '../scripts/utils';
+
+    let toDos; 
+
+	onMount( async () => {
+        toDos = await getData('../../static/todos.json');
+	});
+
 </script>
 
 <style global>

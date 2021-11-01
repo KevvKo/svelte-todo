@@ -1,9 +1,9 @@
 {
     "toDos": 
-        {
-            "1": "clean kitchen",
-            "2": "learn",
-            "3": "buy ingredients",
-            "4": "write essay"
-        }
+        [
+            "clean kitchen",
+            "learn",
+            "buy ingredients",
+            "write essay"
+        ]
 }
