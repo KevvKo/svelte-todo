@@ -13,14 +13,5 @@ module.exports = {
 		es2017: true,
 		node: true,
 		'jest/globals': true
-	},
-	rules: {
-		"jest/no-disabled-tests": "warn",
-		"jest/no-focused-tests": "warn",
-		"jest/no-identical-title": "warn",
-		"jest/prefer-to-have-length": "warn",
-		"jest/valid-expect": "warn",
-		"no-empty-function": 0,
-		"semi": ["warning", "always"]
-	  }
+	}
 };
