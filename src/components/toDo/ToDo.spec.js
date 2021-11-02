@@ -6,10 +6,10 @@ describe('ToDo component',() => {
     beforeEach(() => {
         render( ToDo, {
             description: 'xyz'
-        })
-    })
+        });
+    });
 
     it('should render description property', () => {
         expect(screen.getByText(/xyz/)).toBeTruthy();
-    })
-})
+    });
+});

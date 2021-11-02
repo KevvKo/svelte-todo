@@ -13,5 +13,9 @@ module.exports = {
 		es2017: true,
 		node: true,
 		'jest/globals': true
+	},
+	rules: {
+		semi: [1, "always"],
+		'no-unused-vars': 1
 	}
 };

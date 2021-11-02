@@ -5,4 +5,4 @@ describe('AddToDo component',() => {
     it('should render correctly', () => {
         render(Dialog);
     });
-})
+});

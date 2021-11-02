@@ -36,7 +36,7 @@
     let toDos; 
  
 	onMount( async () => {
-        toDos = await getData('../../static/todos.json');
+        toDos = await getData('/todos.json');
 	});
 
 </script>

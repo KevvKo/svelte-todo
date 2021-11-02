@@ -15,5 +15,5 @@
 </li>
 
 <script>
-    export let description
+    export let description;
 </script>
