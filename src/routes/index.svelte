@@ -16,7 +16,8 @@
                 <ToDo description={todo} />
             {/each}
         </ul>
-    <AddToDo />
+    <AddToDo onClick={handleClick} />
+    <Dialog show={show}/>
 </div>
 
 {:else}
@@ -30,11 +31,16 @@
     import ToDo from '../components/toDo/ToDo.svelte';
     import AddToDo from '../components/addToDo/AddToDo.svelte';
     import Loading from '../components/loading/Loading.svelte';
+    import Dialog from '../components/dialog/Dialog.svelte';
     // Utils
     import getData from '../scripts/utils';
 
     let toDos; 
+    let show = false;
 
+    const handleClick = () => {
+        show = !show;
+    }
 	onMount( async () => {
         toDos = await getData('../../static/todos.json');
 	});
