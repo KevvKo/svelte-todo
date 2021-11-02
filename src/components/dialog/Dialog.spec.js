@@ -1,8 +1,8 @@
-import Dialog from './Dalog.svelte';
+import Dialog from './Dialog.svelte';
 import { render, screen } from '@testing-library/svelte';
 
 describe('AddToDo component',() => {
-    beforeEach(() => {
-        render(Dialog)
-    })
+    it('should render correctly', () => {
+        render(Dialog);
+    });
 })

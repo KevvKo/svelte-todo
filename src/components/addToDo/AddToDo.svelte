@@ -9,9 +9,3 @@
 <script>
     export let onClick;
 </script>
-
-<style>
-    img{
-        width: 16px;
-    }
-</style>

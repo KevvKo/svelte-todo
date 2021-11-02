@@ -1,13 +1,9 @@
 module.exports = {
 	root: true,
-	parser: '@typescript-eslint/parser',
-	extends: ['eslint:recommended', 'plugin:@typescript-eslint/recommended', 'prettier'],
-	plugins: ['svelte3', '@typescript-eslint', 'jest'],
+	extends: ['eslint:recommended', 'prettier'],
+	plugins: ['svelte3', 'jest'],
 	ignorePatterns: ['*.cjs'],
 	overrides: [{ files: ['*.svelte'], processor: 'svelte3/svelte3' }],
-	settings: {
-		'svelte3/typescript': () => require('typescript')
-	},
 	parserOptions: {
 		sourceType: 'module',
 		ecmaVersion: 2019
@@ -18,12 +14,13 @@ module.exports = {
 		node: true,
 		'jest/globals': true
 	},
-	"rules": {
+	rules: {
 		"jest/no-disabled-tests": "warn",
 		"jest/no-focused-tests": "warn",
 		"jest/no-identical-title": "warn",
 		"jest/prefer-to-have-length": "warn",
 		"jest/valid-expect": "warn",
-		"no-empty-function": 0
+		"no-empty-function": 0,
+		"semi": ["warning", "always"]
 	  }
 };
