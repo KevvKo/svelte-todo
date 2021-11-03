@@ -6,20 +6,18 @@ import { render, screen } from '@testing-library/svelte';
  */
 
 describe('Index component',() => {
-    // beforeEach(() => {
-    //     render(Index)
-    // })
+    beforeEach(() => {
+        render(Index);
+    });
 
     it('should render labels', () => {
  
-            // screen.debug()
-            // expect(screen.getByText('Svelte-ToDo')).toBeTruthy();
-            // expect(screen.getByTestId(/loading-spinner/)).toBeTruthy();
+            expect(screen.getByText('Svelte-ToDo')).toBeTruthy();
+            expect(screen.getByTestId(/loading-spinner/)).toBeTruthy();
             // expect(screen.getByText('To Do´s')).toBeTruthy();
      
-
     });
     it('should render github image', () => {
-        // expect(screen.getByAltText(/Github/)).toBeTruthy();
+        expect(screen.getByAltText(/Github/)).toBeTruthy();
     });
 });
