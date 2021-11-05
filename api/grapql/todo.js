@@ -2,18 +2,19 @@ const { gql } = require('apollo-server-express');
 
 const ToDo = gql`
     type ToDo {
-        text: String
+        text: String!
     }
 
     type Mutation {
-        createToDo ( text: String ): ToDo
+        createToDo ( text: String ): ToDo!
     }
 `;
 
 const ToDoResolvers = {
     Mutation: {
         createToDo: async ( parent, args, context, info ) => {
-            return 'mock'
+            const { text } = args;
+            return { text: text };
         }
     }
 }

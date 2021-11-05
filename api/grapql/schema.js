@@ -11,8 +11,8 @@ const Query = gql`
 
 const QueryResolvers = {
     Query: {
-        todo: async ( parent, args, context) => {
-            return ''
+        todo: async ( parent, args, context ) => {
+            return { text: 'Im a ToDo' }
         }
     }
 }

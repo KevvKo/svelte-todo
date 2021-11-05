@@ -1,3 +1,5 @@
+'use strict';
+
 const { ApolloServer } = require('apollo-server');
 const { schema } = require('./grapql/schema');
 
