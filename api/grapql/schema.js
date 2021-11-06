@@ -7,6 +7,7 @@ const { ToDo, ToDoResolvers } = require('./todo');
 const Query = gql`
     type Query {
         todo(text: String! ): ToDo!
+        todos: [ToDo]
     }
 `; 
 
@@ -15,6 +16,10 @@ const QueryResolvers = {
         todo: (parent, args, context) => {
             const { collection } = context;
             return collection.findOne({ text: args.text });
+        },
+        todos: (parent, args, context) => {
+            const { collection } = context;
+            return collection.find().toArray();
         }
     }
 };
