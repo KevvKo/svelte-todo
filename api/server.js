@@ -2,12 +2,14 @@
 
 const { ApolloServer } = require('apollo-server');
 const { schema } = require('./grapql/schema');
-const { isConnected } = require('./data/connector');
-
+const { isConnected, create, read } = require('./data/connector');
 
 const server = new ApolloServer({ 
     schema: schema,
-    context: {}
+    context: {
+        create,
+        read
+    }
 });
 
 // check the db connecthon

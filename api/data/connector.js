@@ -43,19 +43,19 @@ async function create (value) {
  * @param {String} value 
  */
 async function read (value){
-  await client.connect(async (err) => {
 
+  await client.connect(async (err) => {
     if(err) {
       return err;
     }
-    const collection = client.db(db).collection(collectionName);
-  
+
+    const collection = await client.db('ToDoApp').collection('ToDos');
     const cursor = await collection.find({ text: value });
+    
     if (await cursor.count() === 0) {
       return false;
     }
 
-    client.close();
     return cursor.forEach(console.dir);
   });
 }

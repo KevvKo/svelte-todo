@@ -6,13 +6,17 @@ const { ToDo, ToDoResolvers } = require('./todo');
 
 const Query = gql`
     type Query {
-        todo: ToDo!
-    }npx eslint --init
+        todo(text: String! ): ToDo!
+    }
 `; 
 
 const QueryResolvers = {
     Query: {
-        todo: (parent, args, context) => ({ text: 'Im a ToDo' })
+        todo: async (parent, args, context) => {
+            const { read } = context;
+            const queriedToDo = await read(args.text);
+            return {text: "joo"};
+        }
     }
 };
 
