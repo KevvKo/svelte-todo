@@ -1,3 +1,5 @@
+'use strict';
+
 const { gql } = require('apollo-server-express');
 
 const ToDo = gql`
@@ -12,14 +14,14 @@ const ToDo = gql`
 
 const ToDoResolvers = {
     Mutation: {
-        createToDo: async ( parent, args, context, info ) => {
+        createToDo: (parent, args, context) => {
             const { text } = args;
             return { text: text };
         }
     }
-}
+};
 
 module.exports = {
     ToDo,
     ToDoResolvers
-}
+};

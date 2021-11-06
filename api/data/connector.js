@@ -1,12 +1,22 @@
+'use strict';
+
 const { MongoClient } = require('mongodb');
-require('dotenv').config()
+require('dotenv').config();
 
 const db = 'ToDoApp';
-const collection = ' ToDos';
+const collectionName = ' ToDos';
 
-const client = new MongoClient( process.env.API_URI, { useNewUrlParser: true, useUnifiedTopology: true });
+const client = new MongoClient(
+  process.env.API_URI,
+  { useNewUrlParser: true, 
+    useUnifiedTopology: true }
+);
 
-async function isConnected(){
+/**
+ * 
+ * @returns boolean
+ */
+function isConnected(){
   return client.isConnected();
 }
 
@@ -14,15 +24,17 @@ async function isConnected(){
  * 
  * @param {String} value 
  */
-async function create( value ) {
-  client.connect(async err => {
-
-    const collection = client.db( db ).collection( collection );
+async function create (value) {
+  await client.connect(async (err) => {
+    if(err) {
+      return err;
+    }
+    const collection = await client.db(db).collection(collectionName);
     collection.insertOne({
       text: value
-    }).then( res => {
+    }).then((res) => {
       console.info(res);
-    })
+    });
   });
 }
 
@@ -30,16 +42,19 @@ async function create( value ) {
  * 
  * @param {String} value 
  */
-async function read( value ){
-  client.connect(async err => {
+async function read (value){
+  await client.connect(async (err) => {
 
-    const collection = client.db( db ).collection( collection );
+    if(err) {
+      return err;
+    }
+    const collection = client.db(db).collection(collectionName);
   
-    const cursor = await collection.find({text: value })
-    if ((await cursor.count()) === 0) {
+    const cursor = await collection.find({ text: value });
+    if (await cursor.count() === 0) {
       return false;
     }
-    
+
     client.close();
     return cursor.forEach(console.dir);
   });
@@ -49,4 +64,4 @@ module.exports = {
   isConnected,
   create,
   read
-}
+};
