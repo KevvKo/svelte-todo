@@ -12,10 +12,9 @@ const Query = gql`
 
 const QueryResolvers = {
     Query: {
-        todo: async (parent, args, context) => {
-            const { read } = context;
-            const queriedToDo = await read(args.text);
-            return {text: "joo"};
+        todo: (parent, args, context) => {
+            const { collection } = context;
+            return collection.findOne({ text: args.text });
         }
     }
 };
