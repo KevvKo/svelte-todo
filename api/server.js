@@ -2,14 +2,17 @@
 
 const { ApolloServer } = require('apollo-server');
 const { schema } = require('./grapql/schema');
-const { MongoClient } = require("mongodb");
+const { isConnected } = require('./data/connector');
 
 
 const server = new ApolloServer({ 
-    schema: schema
+    schema: schema,
+    context: {}
 });
 
-
-server.listen().then(({ url }) => {
-    console.log(`🚀  Server ready at ${url}`);
-  });
+// check the db connecthon
+if(isConnected){
+    server.listen().then(({ url }) => {
+        console.log(`🚀  Server ready at ${url}`);
+      });
+}
