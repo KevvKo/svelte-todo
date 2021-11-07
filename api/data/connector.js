@@ -10,7 +10,7 @@ const client = new MongoClient(
 );
 
 client.connect();
-  const collection = client.db('ToDoApp').collection('ToDos');
+const collection = client.db('ToDoApp').collection('ToDos');
 
 
 /**

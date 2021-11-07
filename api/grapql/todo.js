@@ -1,6 +1,7 @@
 'use strict';
 
 const { gql } = require('apollo-server-express');
+const { identity } = require('lodash');
 
 const ToDo = gql`
     type ToDo {
@@ -14,9 +15,17 @@ const ToDo = gql`
 
 const ToDoResolvers = {
     Mutation: {
-        createToDo: (parent, args, context) => {
+        createToDo: async (parent, args, context) => {
             const { text } = args;
-            return { text: text };
+            const { collection } = context;
+            const data = { text: text };            
+            const result = await collection.insertOne(data); 
+            
+            if(result.acknowledged){
+                return { text: data.text };
+            }
+            
+            throw new Error('Something went wrong');
         }
     }
 };
