@@ -7,23 +7,23 @@
     </a>
 </header>
 
-{#if !$toDos}
+{#if !toDos}
     <Loading />
 {:else}
     <div class='w-11/12 m-auto mt-10 p-2'>
         <h1 class='bg-purple-500 text-white font-medium rounded p-2'> To Do´s</h1>
 
-            <!-- <ul class='mb-5'>
+            <ul class='mb-5'>
                 {#each toDos as todo }
-                    <ToDo description={todo} />
+                    <ToDo description={todo.text} />
                 {/each}
-            </ul> -->
+            </ul>
         <AddToDo />
     </div>
 {/if}
 
 <script>
-	import { afterUpdate } from 'svelte';
+	import { afterUpdate, onMount } from 'svelte';
     import { ApolloClient, InMemoryCache, createHttpLink } from '@apollo/client';
     import { setClient, query } from "svelte-apollo";
     // Components
@@ -32,8 +32,7 @@
     import Loading from '../components/loading/Loading.svelte';
     // GQL
     import { TODOS_QUERY } from '../graphql/toDoQuerys';
-    // Utils
-    import getData from '../scripts/utils';
+
 
     let toDos; 
 
@@ -50,8 +49,11 @@
     setClient(client);
 
     const data = query(TODOS_QUERY)
-    afterUpdate( async () => {
-        toDos = await data.result()
+    onMount( async () => {
+        const result = await data.result()
+        if(result.data ){
+            toDos = result.data.todos;
+        }
     })
  
 </script>
