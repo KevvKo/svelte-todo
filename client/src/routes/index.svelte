@@ -7,38 +7,53 @@
     </a>
 </header>
 
-{#if toDos}
-<div class='w-11/12 m-auto mt-10 p-2'>
-    <h1 class='bg-purple-500 text-white font-medium rounded p-2'> To Do´s</h1>
-
-        <ul class='mb-5'>
-            {#each toDos as todo }
-                <ToDo description={todo} />
-            {/each}
-        </ul>
-    <AddToDo />
-</div>
-
+{#if !$toDos}
+    <Loading />
 {:else}
+    <div class='w-11/12 m-auto mt-10 p-2'>
+        <h1 class='bg-purple-500 text-white font-medium rounded p-2'> To Do´s</h1>
 
-<Loading />
+            <!-- <ul class='mb-5'>
+                {#each toDos as todo }
+                    <ToDo description={todo} />
+                {/each}
+            </ul> -->
+        <AddToDo />
+    </div>
 {/if}
 
 <script>
-    import { onMount } from 'svelte';
+	import { afterUpdate } from 'svelte';
+    import { ApolloClient, InMemoryCache, createHttpLink } from '@apollo/client';
+    import { setClient, query } from "svelte-apollo";
     // Components
     import ToDo from '../components/toDo/ToDo.svelte';
     import AddToDo from '../components/addToDo/AddToDo.svelte';
     import Loading from '../components/loading/Loading.svelte';
+    // GQL
+    import { TODOS_QUERY } from '../graphql/toDoQuerys';
     // Utils
     import getData from '../scripts/utils';
 
     let toDos; 
- 
-	onMount( async () => {
-        toDos = await getData('/todos.json');
-	});
 
+    const httpLink = createHttpLink({
+        uri: 'http://localhost:4000'
+    });
+
+ 
+    const client = new ApolloClient({
+        link: httpLink,
+        cache: new InMemoryCache()
+    });
+
+    setClient(client);
+
+    const data = query(TODOS_QUERY)
+    afterUpdate( async () => {
+        toDos = await data.result()
+    })
+ 
 </script>
 
 <style global>
