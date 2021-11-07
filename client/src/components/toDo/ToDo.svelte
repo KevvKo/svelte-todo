@@ -15,15 +15,23 @@
 </li>
 
 <script>
-    import { DELETE_TODO } from '../../graphql/toDosMutation';
     import { mutation } from "svelte-apollo";
+    import { DELETE_TODO } from '../../graphql/toDosMutation';
+    import { EDIT_TODO } from '../../graphql/toDosMutation';
     
     export let description;
 
+    const editToDo = mutation(EDIT_TODO);
     const deleteToDo = mutation(DELETE_TODO);
 
     const handleEdit = async () => {
-
+        await editToDo({
+            variables: {
+                oldText: description,
+                newText: 'hello'
+            }
+        })
+        location.reload();
     } 
 
     const handleDelete= async () => {
