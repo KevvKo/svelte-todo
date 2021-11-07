@@ -34,5 +34,11 @@
     "svelte-preprocess": "^4.9.4",
     "tailwindcss": "^2.2.19"
   },
-  "type": "module"
+  "type": "module",
+  "dependencies": {
+    "@apollo/client": "^3.4.16",
+    "graphql": "^15.7.2",
+    "react": "^17.0.2",
+    "svelte-apollo": "^0.4.0"
+  }
 }
