@@ -1,5 +1,7 @@
 <li class='rounded px-2 flex p-1'>
-    {description}
+    <span class='font-medium text-gray-700'>
+        {description}
+    </span>
     <!-- edit icon -->
     <button class='ml-auto mr-1 hover:bg-purple-300 p-1 duration-100 rounded' on:click={ handleShowEdit }>
         <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -13,16 +15,21 @@
         </svg>
     </button>
 </li>
-<Dialog 
-    callback={ deleteCallback } 
-    show={showDeleteDialog}
-    deleteDialog
-/>
-<Dialog 
-    callback={ editCallback}
-    show={showEditDialog}
-/>
-
+{#if showDeleteDialog}
+    <Dialog 
+        callback={ deleteCallback } 
+        show={showDeleteDialog}
+        deleteDialog
+        onClose={handleShowDelete}
+    />
+{/if}
+{#if showEditDialog}
+    <Dialog 
+        callback={ editCallback}
+        show={showEditDialog}
+        onClose={handleShowEdit}
+    />
+{/if}
 <script>
     import Dialog from "../dialog/Dialog.svelte";
     import { mutation } from "svelte-apollo";
