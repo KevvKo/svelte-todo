@@ -16,6 +16,7 @@
 <Dialog 
     callback={ deleteCallback } 
     show={showDeleteDialog}
+    deleteDialog
 />
 <Dialog 
     callback={ editCallback}
