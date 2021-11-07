@@ -64,10 +64,9 @@
         const result = await data.result()
         if(result.data ){
             toDos = result.data.todos;
-            console.log(toDos.length)
         }
     });
- 
+
 </script>
 
 <style global>
