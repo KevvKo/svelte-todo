@@ -15,15 +15,17 @@
 {/if}
 
 <script>
+    import { getContext } from 'svelte';
     import Dialog from "../dialog/Dialog.svelte";
     import { mutation } from "svelte-apollo";
     import { CREATE_TODO } from '../../graphql/toDosMutation';
+
     //props
     let show = false;
+    let toDos = getContext('toDos');
 
     const handleShow = () => {
         show = !show;
-;
     }
 
     const createToDo = mutation(CREATE_TODO);
@@ -31,10 +33,10 @@
     const callback = async ( value ) => {
         handleShow();
         try{
-           await createToDo({variables: {
+            const { data } = await createToDo({variables: {
                 text: value
             }});
-            location.reload();
+            toDos.set( [...$toDos, data.createToDo ] );
         } catch {
             alert('Somethign went wrong with your mutation')
         }

@@ -31,6 +31,7 @@
     />
 {/if}
 <script>
+    import { getContext } from 'svelte';
     import Dialog from "../dialog/Dialog.svelte";
     import { mutation } from "svelte-apollo";
     import { DELETE_TODO } from '../../graphql/toDosMutation';
@@ -39,6 +40,7 @@
     export let description;
     let showEditDialog = false;
     let showDeleteDialog = false;
+    let toDos = getContext('toDos');
 
     const editToDo = mutation(EDIT_TODO);
     const deleteToDo = mutation(DELETE_TODO);
@@ -60,7 +62,7 @@
                     newText: value
                 }
             })
-            location.reload();
+            // location.reload();
         } catch {
             alert('Something went wrong')
         }
