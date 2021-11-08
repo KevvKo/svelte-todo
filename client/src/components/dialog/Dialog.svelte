@@ -16,7 +16,7 @@
                     class='ml-2 bg-red-500 p-2 hover:bg-red-700 transition duration-200 text-white rounded' 
                 >Delete</button>
                 {:else}
-                    <input on:change={ handleChange }
+                    <input on:keypress={ handleChange }
                     class='ml-1 mb-2 pl-2 py-2 rounded focus:ring-2 ring-2 ring-purple-400 focus:ring-purple-500 focus:outline-none' 
                     placeholder='Enter a new ToDo' 
                     type='text'
@@ -51,15 +51,19 @@
             onClose()
         }
         if(e.key === 'Enter'){
-            inputValue
-            ? callback(inputValue)
-            : onClose();
+      
+            if(inputValue){
+                callback(inputValue);
+            } else{
+                 onClose();
+            }
         }
 
     }
 
     const handleChange = (e) => {
         inputValue = e.target.value;
+
     }
 
 </script>
