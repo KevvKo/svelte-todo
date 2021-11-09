@@ -62,24 +62,35 @@
                     newText: value
                 }
             })
-            // location.reload();
-        } catch {
-            alert('Something went wrong')
-        }
+            const newArray = $toDos.map( element => {
+                const newObject = {};
 
+                element.text === description 
+                    ? newObject.text = value
+                    : newObject.text = element.text
+
+                return newObject
+            });
+            toDos.set( newArray );
+
+        } catch {
+            alert('Something went wrong');
+        }
     }
 
-    const deleteCallback = async (value) =>{
+    const deleteCallback = async () =>{
         handleShowDelete();
         try {
-            await deleteToDo({
+            const { data } = await deleteToDo({
                 variables: {
                     text: description
                 }
-            })
-            location.reload();
+            });
+            const action = data.deleteToDo;
+            const newArray = $toDos.filter( element => element.text !== action.text );
+            toDos.set( newArray );
         } catch {
-            alert('Deletion was not possible')
+            alert('Deletion was not possible');
         }
     }
 
