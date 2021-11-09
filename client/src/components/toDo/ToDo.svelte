@@ -1,5 +1,7 @@
 <li class='rounded px-2 flex p-1'>
-    {description}
+    <span class='font-medium text-gray-700'>
+        {description}
+    </span>
     <!-- edit icon -->
     <button class='ml-auto mr-1 hover:bg-purple-300 p-1 duration-100 rounded' on:click={ handleShowEdit }>
         <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -13,17 +15,23 @@
         </svg>
     </button>
 </li>
-<Dialog 
-    callback={ deleteCallback } 
-    show={showDeleteDialog}
-    deleteDialog
-/>
-<Dialog 
-    callback={ editCallback}
-    show={showEditDialog}
-/>
-
+{#if showDeleteDialog}
+    <Dialog 
+        callback={ deleteCallback } 
+        show={showDeleteDialog}
+        deleteDialog
+        onClose={handleShowDelete}
+    />
+{/if}
+{#if showEditDialog}
+    <Dialog 
+        callback={ editCallback}
+        show={showEditDialog}
+        onClose={handleShowEdit}
+    />
+{/if}
 <script>
+    import { getContext } from 'svelte';
     import Dialog from "../dialog/Dialog.svelte";
     import { mutation } from "svelte-apollo";
     import { DELETE_TODO } from '../../graphql/toDosMutation';
@@ -32,6 +40,7 @@
     export let description;
     let showEditDialog = false;
     let showDeleteDialog = false;
+    let toDos = getContext('toDos');
 
     const editToDo = mutation(EDIT_TODO);
     const deleteToDo = mutation(DELETE_TODO);
@@ -53,24 +62,35 @@
                     newText: value
                 }
             })
-            location.reload();
-        } catch {
-            alert('Something went wrong')
-        }
+            const newArray = $toDos.map( element => {
+                const newObject = {};
 
+                element.text === description 
+                    ? newObject.text = value
+                    : newObject.text = element.text
+
+                return newObject
+            });
+            toDos.set( newArray );
+
+        } catch {
+            alert('Something went wrong');
+        }
     }
 
-    const deleteCallback = async (value) =>{
+    const deleteCallback = async () =>{
         handleShowDelete();
         try {
-            await deleteToDo({
+            const { data } = await deleteToDo({
                 variables: {
                     text: description
                 }
-            })
-            location.reload();
+            });
+            const action = data.deleteToDo;
+            const newArray = $toDos.filter( element => element.text !== action.text );
+            toDos.set( newArray );
         } catch {
-            alert('Deletion was not possible')
+            alert('Deletion was not possible');
         }
     }
 
