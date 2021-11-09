@@ -7,7 +7,7 @@
     </a>
 </header>
 
-{#if !toDos}
+{#if $data.loading}
     <Loading />
 {:else}
     <!-- block to render todos -->
@@ -16,7 +16,7 @@
         {#if $toDoStore.length === 0}
             <!-- empty todos -->
             <div class='text-lg text-center'>
-                Everything almoste done!
+                Add a new ToDo
             </div>
         {:else}
                 <h1 class='bg-purple-500 text-white font-medium rounded p-2'> To Do´s</h1>
@@ -45,12 +45,6 @@
     // GQL
     import { TODOS_QUERY } from '../graphql/toDoQuerys';
 
-    let toDos = []
-    let toDoStore = writable(toDos); 
-
-    $: toDoStore.set(toDos)
-    setContext('toDos', toDoStore);
-
     const httpLink = createHttpLink({
         uri: 'http://localhost:4000'
     });
@@ -64,6 +58,12 @@
     setClient(client);
 
     const data = query(TODOS_QUERY)
+
+    let toDos = []
+    let toDoStore = writable(toDos); 
+
+    $: toDoStore.set(toDos)
+    setContext('toDos', toDoStore);
 
     onMount( async () => {
         const result = await data.result()
