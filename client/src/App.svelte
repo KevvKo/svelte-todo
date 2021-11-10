@@ -79,4 +79,8 @@
     @tailwind base;
     @tailwind components;
     @tailwind utilities;
+
+    body{
+        padding: 0;
+    }
 </style>
