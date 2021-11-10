@@ -3,7 +3,7 @@
         Svelte-ToDo        
     </span>
     <a class='ml-auto' href='https://github.com/KevvKo/svelte-todo'>
-        <img src='./static/GitHub-Mark-Light-32px.png' alt='Github'>
+        <img src='/img/GitHub-Mark-Light-32px.png' alt='Github'>
     </a>
 </header>
 
@@ -79,5 +79,4 @@
     @tailwind base;
     @tailwind components;
     @tailwind utilities;
-    
 </style>
