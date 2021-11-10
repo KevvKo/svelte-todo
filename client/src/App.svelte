@@ -3,7 +3,7 @@
         Svelte-ToDo        
     </span>
     <a class='ml-auto' href='https://github.com/KevvKo/svelte-todo'>
-        <img src='../staticGitHub-Mark-Light-32px.png' alt='Github'>
+        <img src='./static/GitHub-Mark-Light-32px.png' alt='Github'>
     </a>
 </header>
 
@@ -35,7 +35,7 @@
 <script>
 	import { onMount, setContext } from 'svelte';
     import { writable } from 'svelte/store';
-
+    import "tailwindcss/tailwind.css"
     import { ApolloClient, HttpLink } from '@apollo/client/core/core.cjs.js';
     import { InMemoryCache } from '@apollo/client/cache/cache.cjs.js';
     import { setClient, query } from "svelte-apollo";
@@ -69,12 +69,15 @@
     onMount( async () => {
         const result = await data.result()
         if(result.data ){
-           toDos = result.data.todos ;
+           toDos = result.data.todos;
         }
     });
 
 </script>
 
-<style>
-    @import './css/styles.css';
+<style global lang="postcss">
+    @tailwind base;
+    @tailwind components;
+    @tailwind utilities;
+    
 </style>
