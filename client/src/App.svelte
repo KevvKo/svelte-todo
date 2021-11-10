@@ -3,7 +3,7 @@
         Svelte-ToDo        
     </span>
     <a class='ml-auto' href='https://github.com/KevvKo/svelte-todo'>
-        <img src='/GitHub-Mark-Light-32px.png' alt='Github'>
+        <img src='../staticGitHub-Mark-Light-32px.png' alt='Github'>
     </a>
 </header>
 
@@ -36,16 +36,17 @@
 	import { onMount, setContext } from 'svelte';
     import { writable } from 'svelte/store';
 
-    import { ApolloClient, InMemoryCache, createHttpLink } from '@apollo/client';
+    import { ApolloClient, HttpLink } from '@apollo/client/core/core.cjs.js';
+    import { InMemoryCache } from '@apollo/client/cache/cache.cjs.js';
     import { setClient, query } from "svelte-apollo";
     // Components
-    import ToDo from '../components/toDo/ToDo.svelte';
-    import AddToDo from '../components/addToDo/AddToDo.svelte';
-    import Loading from '../components/loading/Loading.svelte';
+    import ToDo from './components/toDo/ToDo.svelte';
+    import AddToDo from './components/addToDo/AddToDo.svelte';
+    import Loading from './components/loading/Loading.svelte';
     // GQL
-    import { TODOS_QUERY } from '../graphql/toDoQuerys';
+    import { TODOS_QUERY } from './graphql/toDoQuerys';
 
-    const httpLink = createHttpLink({
+    const httpLink = new HttpLink({
         uri: 'http://localhost:4000'
     });
 
@@ -74,6 +75,6 @@
 
 </script>
 
-<style global>
-    @import '../css/styles.css';
+<style>
+    @import './css/styles.css';
 </style>

@@ -17,7 +17,7 @@ const QueryResolvers = {
             const { collection } = context;
             return collection.findOne({ text: args.text });
         },
-        todos: (parent, args, context) => {
+        todos: async (parent, args, context) => {
             const { collection } = context;
             return collection.find().toArray();
         }
