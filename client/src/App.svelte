@@ -47,7 +47,7 @@
     import { TODOS_QUERY } from './graphql/toDoQuerys';
 
     const httpLink = new HttpLink({
-        uri: 'http://localhost:4000'
+        uri: 'https://8b7imjxceh.execute-api.us-east-1.amazonaws.com/dev/'
     });
 
  
