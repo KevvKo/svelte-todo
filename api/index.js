@@ -1,5 +1,7 @@
-const { createLocalServer } = require('./server');
+'use strict';
+
 const { isConnected } = require('./data/connector');
+const { createLocalServer } = require('./server');
 
 const server = createLocalServer();
 
