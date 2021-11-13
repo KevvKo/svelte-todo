@@ -1,28 +1,18 @@
 'use strict';
 
-const ApolloServer = require('apollo-server').ApolloServer;
-const ApolloServerLambda = require('apollo-server-lambda').AplloServer;
+const { ApolloServer } = require('apollo-server');
 const { schema } = require('./grapql/schema');
-const { collection } = require('./data/connector');
+const { isConnected, collection } = require('./data/connector');
 
-const createLambdaServer = () => {
-    return new ApolloServerLambda({ 
-        schema: schema,
-        context: {
-            collection
+const server = new ApolloServer({ 
+    schema: schema,
+    context: {
+        collection
     }
-    });
-}
+});
 
-const createLocalServer = () => {
-    return new ApolloServer({ 
-        schema: schema,
-        context: {
-            collection
-        }
-    });
+if(isConnected) {
+    server.listen().then(({ url }) => {
+        console.log(`🚀 Server ready at ${url}`);
+      });
 }
-
-module.exports = { 
-    createLambdaServer, 
-    createLocalServer };
