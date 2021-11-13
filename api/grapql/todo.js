@@ -1,10 +1,10 @@
 'use strict';
 
-const { gql } = require('apollo-server-express');
-const { identity } = require('lodash');
+const { gql } = require('apollo-server-lambda');
 
 const ToDo = gql`
     type ToDo {
+        id: String!
         text: String!
     }
 

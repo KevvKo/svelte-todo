@@ -4,7 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "start": "nodemon server.js",
+    "start": "nodemon index.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [],
@@ -13,11 +13,14 @@
   "dependencies": {
     "@graphql-tools/schema": "^8.3.1",
     "apollo-server": "^3.4.0",
+    "apollo-server-lambda": "^3.5.0",
+    "cpx": "^1.5.0",
     "dotenv": "^10.0.0",
     "graphql": "^15.7.2",
     "http": "^0.0.1-security",
     "lodash": "^4.17.21",
     "mongoose": "^6.0.12",
+    "netlify-lambda": "^2.0.15",
     "nodemon": "^2.0.14"
   },
   "devDependencies": {

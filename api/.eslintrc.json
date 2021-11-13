@@ -15,7 +15,6 @@
         "array-bracket-spacing": "warn",
         "array-callback-return": "warn",
         "array-element-newline": "warn",
-        "arrow-body-style": "warn",
         "arrow-parens": "warn",
         "arrow-spacing": [
             "warn",

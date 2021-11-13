@@ -1,5 +1,5 @@
 'use strict';
-const { gql } = require('apollo-server-express');
+const { gql } = require('apollo-server-lambda');
 const { makeExecutableSchema } = require('@graphql-tools/schema');
 const { merge } = require('lodash');
 const { ToDo, ToDoResolvers } = require('./todo');
@@ -17,7 +17,7 @@ const QueryResolvers = {
             const { collection } = context;
             return collection.findOne({ text: args.text });
         },
-        todos: (parent, args, context) => {
+        todos: async (parent, args, context) => {
             const { collection } = context;
             return collection.find().toArray();
         }
