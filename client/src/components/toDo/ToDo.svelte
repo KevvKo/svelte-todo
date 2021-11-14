@@ -74,7 +74,7 @@
             toDos.set( newArray );
 
         } catch {
-            alert('Something went wrong');
+            alert('It wasn´t possible to edit the ToDo. Please try again');
         }
     }
 

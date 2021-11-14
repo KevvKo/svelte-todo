@@ -38,7 +38,7 @@
             }});
             toDos.set( [...$toDos, data.createToDo ] );
         } catch {
-            alert('Somethign went wrong with your mutation')
+            alert('Ups, maybe it is a bad day. The ToDo could not be created. Please try again.')
         }
     }
 </script>

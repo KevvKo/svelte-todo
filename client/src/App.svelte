@@ -9,6 +9,9 @@
 
 {#if $data.loading}
     <Loading />
+
+{:else if $data.error}
+    <Error />
 {:else}
     <!-- block to render todos -->
     <div class='w-11/12 m-auto mt-10 p-2'>
@@ -20,13 +23,11 @@
             </div>
         {:else}
                 <h1 class='bg-purple-500 text-white font-medium rounded p-2'> To Do´s</h1>
-
                     <ul class='mb-5'>
                         {#each $toDoStore as todo }
                             <ToDo description={todo.text} />
                         {/each}
                     </ul>
-
         {/if}
         <AddToDo />
     </div>
@@ -43,6 +44,7 @@
     import ToDo from './components/toDo/ToDo.svelte';
     import AddToDo from './components/addToDo/AddToDo.svelte';
     import Loading from './components/loading/Loading.svelte';
+    import Error from './components/error/Error.svelte';
     // GQL
     import { TODOS_QUERY } from './graphql/toDoQuerys';
 
